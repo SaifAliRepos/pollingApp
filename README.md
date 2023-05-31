@@ -2,8 +2,4 @@
 
 # pollingApp
 
-#Hellog
-
-#hemlog
-
-#hello
+# Credits: Traversy Media

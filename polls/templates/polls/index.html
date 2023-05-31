@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
+
 {% block content %}
-{% for question in question_list %}
-<p>{{question.question_text}}</p>
-<a href="{% url 'polls:show' question.id %}">Vote now</a>
-{% endfor %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h3>Avaiable <span class="text-warning">polls.</span></h3>
+      <hr />
+      {% for question in question_list %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ question.question_text }}</h5>
+          <a class="btn btn-sm btn-success" href="{% url 'polls:show' question.id %}">Vote now</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -2,23 +2,27 @@
 {% block content %}
 
 {% if error_message %}
-<p class="alert alert-danger">
+<div class="alert alert-danger mt-2" role="alert">
   <strong>{{ error_message }}</strong>
-</p>
+</div>
 {% endif %}
 
-<h3>{{ question_with_choices.question_text }}</h3>
-<form action="{% url 'polls:vote' question_with_choices.id %}" method="post">
-  {% csrf_token %}
-  <ul>
-    {% for choice in question_with_choices.choice_set.all %}
-    <li>
-      <input type="radio" name="choice" class="form-check-input" id="choice{{ forloop.counter }}"
-        value="{{ choice.id }}" />
-      <label for="choice{{ forloop.counter }}">{{ choice.choice_text }} - {{choice.votes}}</label>
-    </li>
-    {% endfor %}
-  </ul>
-  <button type="submit">Vote</button>
-</form>
+<div class="container mt-4">
+  <h3>{{ question_with_choices.question_text }}</h3>
+  <form action="{% url 'polls:vote' question_with_choices.id %}" method="post">
+    {% csrf_token %}
+    <div class="list-group mt-4">
+      {% for choice in question_with_choices.choice_set.all %}
+      <div class="list-group-item">
+        <input type="radio" name="choice" class="form-check-input" id="choice{{ forloop.counter }}"
+          value="{{ choice.id }}" />
+        <label class="form-check-label" for="choice{{ forloop.counter }}">{{ choice.choice_text }} -
+          {{choice.votes}}</label>
+      </div>
+      {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary mt-4">Vote</button>
+  </form>
+</div>
+
 {% endblock %}

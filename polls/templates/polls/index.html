@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% load humanize %}
+
+{% load custom_filters %}
 
 {% block content %}
 <div class="container py-5">
@@ -9,7 +12,17 @@
       {% for question in question_list %}
       <div class="card mb-3">
         <div class="card-body">
-          <h5 class="card-title">{{ question.question_text }}</h5>
+
+          {% if question.pub_date|timesince|naturaltime <= '2 weeks' %}
+          <h5 class="card-title">{{ question.question_text }} </h5>
+          <p class="text-danger">{{ question.pub_date|time_difference }} <span class="text-secondary">left to
+              vote</span></p>
+          {% else %}
+          <p class="text-danger text-bold">Voting has been closed!</p>
+          {% endif %}
+
+
+
           <a class="btn btn-sm btn-success" href="{% url 'polls:show' question.id %}">Vote now</a>
         </div>
       </div>

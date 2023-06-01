@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.humanize',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
